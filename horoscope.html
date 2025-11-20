@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Horoscope - Astrology Universe</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="cosmic-bg">
+        <div class="nebula"></div>
+        <div class="nebula"></div>
+    </div>
+
+    <a href="index.html" class="back-nav" title="Back to Nakshatras">←</a>
+
+    <div class="container">
+        <header style="text-align: center; margin-bottom: 3rem; padding-top: 2rem;">
+            <h1>Daily Horoscope</h1>
+            <p class="subtitle">Your Daily Cosmic Guidance</p>
+        </header>
+
+        <div class="grid-cosmic" id="zodiacGrid">
+            <div class="grid-item" onclick="getHoroscope('aries')">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">♈</div>
+                <h3>Aries</h3>
+            </div>
+            <div class="grid-item" onclick="getHoroscope('taurus')">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">♉</div>
+                <h3>Taurus</h3>
+            </div>
+            <div class="grid-item" onclick="getHoroscope('gemini')">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">♊</div>
+                <h3>Gemini</h3>
+            </div>
+            <div class="grid-item" onclick="getHoroscope('cancer')">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">♋</div>
+                <h3>Cancer</h3>
+            </div>
+            <div class="grid-item" onclick="getHoroscope('leo')">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">♌</div>
+                <h3>Leo</h3>
+            </div>
+            <div class="grid-item" onclick="getHoroscope('virgo')">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">♍</div>
+                <h3>Virgo</h3>
+            </div>
+            <div class="grid-item" onclick="getHoroscope('libra')">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">♎</div>
+                <h3>Libra</h3>
+            </div>
+            <div class="grid-item" onclick="getHoroscope('scorpio')">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">♏</div>
+                <h3>Scorpio</h3>
+            </div>
+            <div class="grid-item" onclick="getHoroscope('sagittarius')">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">♐</div>
+                <h3>Sagittarius</h3>
+            </div>
+            <div class="grid-item" onclick="getHoroscope('capricorn')">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">♑</div>
+                <h3>Capricorn</h3>
+            </div>
+            <div class="grid-item" onclick="getHoroscope('aquarius')">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">♒</div>
+                <h3>Aquarius</h3>
+            </div>
+            <div class="grid-item" onclick="getHoroscope('pisces')">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">♓</div>
+                <h3>Pisces</h3>
+            </div>
+        </div>
+
+        <div id="horoscopeResult" class="hidden" style="margin-top: 3rem;">
+            <div class="info-cards-large"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                <div class="info-card-large"
+                    style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%); border: 2px solid rgba(139, 92, 246, 0.3); border-radius: 20px; padding: 2rem; text-align: center;">
+                    <div class="card-label"
+                        style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 0.75rem;">
+                        Your Sign</div>
+                    <div class="card-value"
+                        style="font-size: 2.5rem; font-family: var(--font-heading); margin-bottom: 0.5rem;"
+                        id="signName">-</div>
+                </div>
+                <div class="info-card-large"
+                    style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%); border: 2px solid rgba(139, 92, 246, 0.3); border-radius: 20px; padding: 2rem; text-align: center;">
+                    <div class="card-label"
+                        style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 0.75rem;">
+                        Date</div>
+                    <div class="card-value"
+                        style="font-size: 1.5rem; font-family: var(--font-heading); margin-bottom: 0.5rem;"
+                        id="dateRange">-</div>
+                </div>
+            </div>
+
+            <div class="glass-panel" style="padding: 2rem; margin-bottom: 2rem;">
+                <h3 style="color: var(--primary); margin-bottom: 1.5rem;">✨ Today's Reading</h3>
+                <p id="description" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main);"></p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                <div class="glass-panel" style="padding: 1.5rem;">
+                    <div
+                        style="color: var(--accent); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 0.5rem;">
+                        Lucky Color</div>
+                    <div id="luckyColor" style="font-size: 1.5rem; font-weight: 600;">-</div>
+                </div>
+                <div class="glass-panel" style="padding: 1.5rem;">
+                    <div
+                        style="color: var(--accent); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 0.5rem;">
+                        Lucky Number</div>
+                    <div id="luckyNumber" style="font-size: 1.5rem; font-weight: 600;">-</div>
+                </div>
+                <div class="glass-panel" style="padding: 1.5rem;">
+                    <div
+                        style="color: var(--accent); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 0.5rem;">
+                        Lucky Time</div>
+                    <div id="luckyTime" style="font-size: 1.5rem; font-weight: 600;">-</div>
+                </div>
+                <div class="glass-panel" style="padding: 1.5rem;">
+                    <div
+                        style="color: var(--accent); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 0.5rem;">
+                        Mood</div>
+                    <div id="mood" style="font-size: 1.5rem; font-weight: 600;">-</div>
+                </div>
+                <div class="glass-panel" style="padding: 1.5rem;">
+                    <div
+                        style="color: var(--accent); font-size: 0.8rem; text-transform: uppercase; margin-bottom: 0.5rem;">
+                        Compatibility</div>
+                    <div id="compatibility" style="font-size: 1.5rem; font-weight: 600;">-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function getHoroscope(sign) {
+            const resultDiv = document.getElementById('horoscopeResult');
+            resultDiv.classList.remove('hidden');
+
+            document.getElementById('signName').textContent = sign.charAt(0).toUpperCase() + sign.slice(1);
+            document.getElementById('description').textContent = 'Loading...';
+
+            try {
+                // Use CORS proxy
+                const proxyUrl = 'https://api.allorigins.win/raw?url=';
+                const apiUrl = `https://aztro.sameerkumar.website?sign=${sign}&day=today`;
+
+                const response = await fetch(proxyUrl + encodeURIComponent(apiUrl), {
+                    method: 'GET'
+                });
+
+                const data = await response.json();
+
+                document.getElementById('dateRange').textContent = data.date_range || '-';
+                document.getElementById('description').textContent = data.description || 'No horoscope available';
+                document.getElementById('luckyColor').textContent = data.color || '-';
+                document.getElementById('luckyNumber').textContent = data.lucky_number || '-';
+                document.getElementById('luckyTime').textContent = data.lucky_time || '-';
+                document.getElementById('mood').textContent = data.mood || '-';
+                document.getElementById('compatibility').textContent = data.compatibility || '-';
+
+                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('description').textContent = 'Unable to load horoscope. Please try again.';
+            }
+        }
+    </script>
+</body>
+
+</html>
